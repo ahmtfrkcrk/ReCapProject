@@ -11,19 +11,19 @@ namespace Entities.Concrete
         public int BrandId { get; set; }
         public int ColorId { get; set; }
         public int ModelYear { get; set; }
-        private decimal dailyPrice;
+        public decimal DailyPrice { get; set; }
         public string Description { get; set; }
 
-        public decimal DailyPrice
-        {
-            get { return dailyPrice; }
-            set {if (value <= 0)
-                    throw new InvalidCastException("Günlük kiralama bedeli 0 veya altında bir bedel olamaz.");
-                else
-                    dailyPrice = value;
+        //public decimal DailyPrice
+        //{
+        //    get { return dailyPrice; }
+        //    set {if (value <= 0)
+        //            throw new InvalidCastException("Günlük kiralama bedeli 0 veya altında bir bedel olamaz.");
+        //        else
+        //            dailyPrice = value;
                 
-                ; }
-        }
+        //        ; }
+        //}
        
     }
 }

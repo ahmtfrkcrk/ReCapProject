@@ -18,7 +18,13 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            _iCarDal.Add(car);
+            if (car.DailyPrice > 0)
+            {
+                _iCarDal.Add(car);
+            }
+            else
+                throw new DuplicateWaitObjectException("Araç günlük ücreti 0 veya 0 'dan az bir tutar olamaz");
+            
         }
 
 
