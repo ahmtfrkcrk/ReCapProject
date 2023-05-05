@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Business.Abstract
+namespace DataAccess.Abstract
 {
-    public interface IBrandService
+  public  interface IColorDal:IEntityRepository<Color>
     {
-        List<Brand> GetAll();
     }
 }
