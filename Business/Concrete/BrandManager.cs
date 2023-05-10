@@ -9,26 +9,41 @@ namespace Business.Concrete
 {
     public class BrandManager : IBrandService
     {
-        IBrandDal _brandDal;
+        IBrandDal _iBrandDal;
 
         public BrandManager(IBrandDal brandDal)
         {
-            _brandDal = brandDal;
+            _iBrandDal = brandDal;
         }
 
         public void Add(Brand brand)
         {
             if (brand.BrandName.Length >= 2)
             {
-                _brandDal.Add(brand);
+                _iBrandDal.Add(brand);
             }
             else
                 throw new DuplicateWaitObjectException("Araç adı 2 karakterden kısa olamaz.");
         }
 
+        public void Delete(Brand brand)
+        {
+            _iBrandDal.Delete(brand);
+        }
+
         public List<Brand> GetAll()
         {
-            return _brandDal.GetAll();
+            return _iBrandDal.GetAll();
+        }
+
+        public Brand GetById(int brandId)
+        {
+            return _iBrandDal.Get(b => b.BrandId == brandId);
+        }
+
+        public void Update(Brand brand)
+        {
+             _iBrandDal.Update(brand);
         }
     }
 }

@@ -12,23 +12,40 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+
+
+
+
+            // CarDetailTest();
+            //CarBrandManagerSelect();
+
+            Console.ReadLine();
+        }
+
+        private static void CarDetailTest()
+        {
             CarManager carManager = new CarManager(new EfCarDal());
-            carManager.Add(new Car {ColorId=2,DailyPrice=0,ModelYear=2012,Description="Test",BrandId=1});
+            foreach (var cM in carManager.GetCarDetail())
+            {
+                Console.WriteLine(cM.CarId + " " + cM.BrandName + " " + cM.ColorName + " " + cM.DailyPrice);
+            }
+        }
+
+        private static void CarBrandManagerSelect()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            carManager.Add(new Car { ColorId = 2, DailyPrice = 875, ModelYear = 2012, Description = "Aylık kiralamada %10 daha uygun", BrandId = 4 });
             BrandManager brandManager = new BrandManager(new EfBrandDal());
+            brandManager.Add(new Brand { BrandName = "Dacia" });//Brand Id otomatik artan alan
 
             foreach (var cM in carManager.GetAll())
             {
                 foreach (var bM in brandManager.GetAll())
                 {
-                    Console.WriteLine(cM.BrandId +" "+bM.BrandName+ " " + cM.ModelYear+" "+cM.DailyPrice+" "+cM.Description);
+                    Console.WriteLine(cM.BrandId + " " + bM.BrandName + " " + cM.ModelYear + " " + cM.DailyPrice + " " + cM.Description);
                 }
-                
+
             }
-           
-
-
-
-            Console.ReadLine();
         }
     }
     class CarDto
