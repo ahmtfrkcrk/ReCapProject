@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Business.Constants;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -12,11 +13,11 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            rentalManager.Add(new Rental { CariId = 3, CustomerId = 3, RentDate = DateTime.Now, ReturnDate = null });
+            
 
-
-
-
-            // CarDetailTest();
+            //CarDetailTest();
             //CarBrandManagerSelect();
 
             Console.ReadLine();
@@ -25,10 +26,23 @@ namespace ConsoleUI
         private static void CarDetailTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var cM in carManager.GetCarDetail())
+
+            var result = carManager.GetCarDetail();
+
+            if (result.Success)
             {
-                Console.WriteLine(cM.CarId + " " + cM.BrandName + " " + cM.ColorName + " " + cM.DailyPrice);
+                foreach (var cM in result.Data)
+                {
+                    Console.WriteLine(cM.CarId + " " + cM.BrandName + " " + cM.ColorName + " " + cM.DailyPrice);
+                }
+
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
         }
 
         private static void CarBrandManagerSelect()
@@ -36,21 +50,16 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             carManager.Add(new Car { ColorId = 2, DailyPrice = 875, ModelYear = 2012, Description = "Aylık kiralamada %10 daha uygun", BrandId = 4 });
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            brandManager.Add(new Brand { BrandName = "Dacia" });//Brand Id otomatik artan alan
+            brandManager.Add(new Brand { BrandName = "Ford" });//Brand Id otomatik artan alan
 
-            foreach (var cM in carManager.GetAll())
+            var result = carManager.GetCarDetail();
+
+            foreach (var cM in result.Data)
             {
-                foreach (var bM in brandManager.GetAll())
-                {
-                    Console.WriteLine(cM.BrandId + " " + bM.BrandName + " " + cM.ModelYear + " " + cM.DailyPrice + " " + cM.Description);
-                }
-
+                Console.WriteLine(cM.CarId + " " + cM.BrandName + " " + cM.ColorName + " " + cM.DailyPrice);
             }
+
         }
     }
-    class CarDto
-    {
-        public int BrandId { get; set; }
-        public string BrandName { get; set; }
-    }
+
 }
