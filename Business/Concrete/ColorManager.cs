@@ -21,7 +21,7 @@ namespace Business.Concrete
         public IResult Add(Color color)
         {
             _colorDal.Add(color);
-            return new SuccessResult("{0}/{1}"+color+Messages.Added);
+            return new SuccessResult("{0}/{1}"+color.ColorName+Messages.Added);
         }
 
         public IResult Delete(Color color)
