@@ -11,7 +11,7 @@ namespace Business.ValidationRules.FluentValidation
     {
         public UserValidator()
         {
-            RuleFor(u => u.Id).Null().WithMessage(Messages.AutomaticIncrementField);
+           
             RuleFor(u => u.Email).NotEmpty();
             RuleFor(u => u.FirstName).NotEmpty();
             RuleFor(u => u.LastName).NotEmpty();
