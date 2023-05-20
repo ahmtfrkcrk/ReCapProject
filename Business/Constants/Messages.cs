@@ -15,5 +15,6 @@ namespace Business.Constants
         public static string Deleted = " silindi";
         public static string Updated = " güncellendi";
         public static string VehicleNotFound = "kiralanacak araç bulunamadı";
+        public static string AutomaticIncrementField = "otomatik artan alan değer girilemez";
     }
 }

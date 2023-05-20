@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -17,18 +18,13 @@ namespace Business.Concrete
         {
             _rentalDal = rentalDal;
         }
-
+        [ValidationAspect(typeof(Rental))]
         public IResult Add(Rental rental)
         {
-            if (rental.ReturnDate!=null)
-            {
+           
                 _rentalDal.Add(rental);
                 return new SuccessResult(Messages.Added);
-            }
-            return new ErrorResult(Messages.VehicleNotFound);
            
-          
-
            
         }
 
