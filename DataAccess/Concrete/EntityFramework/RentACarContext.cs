@@ -24,5 +24,6 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<CarImage> CarImages { get; set; }
 
 
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy;
+using Core.Aspects.Autofac.Performance;
 using Core.CrossCuttingConcerns.Validation;
 using FluentValidation;
 using System;
