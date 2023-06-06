@@ -39,7 +39,7 @@ namespace Business.Concrete
             _carDal.Delete(car);
             return new SuccessResult(Messages.Deleted);
         }
-        [SecuredOperation("Car.List")]
+        //[SecuredOperation("Car.List")]
         [CacheAspect]
         [PerformanceAspect(5)]
         public IDataResult<List<Car>> GetAll()
@@ -53,7 +53,7 @@ namespace Business.Concrete
             //{
             //    return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
             //}
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetail());
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetail(),Messages.Listed);
         }
 
         public IDataResult<List<Car>> GetCarsByBrandId(int Id)
@@ -63,7 +63,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetCarsByColorId(int Id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == Id));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == Id),Messages.Listed);
         }
 
         public IResult Update(Car car)
