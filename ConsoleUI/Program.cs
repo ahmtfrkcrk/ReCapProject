@@ -33,7 +33,7 @@ namespace ConsoleUI
             {
                 foreach (var cM in result.Data)
                 {
-                    Console.WriteLine(cM.CarId + " " + cM.CarName + " " + cM.ColorName + " " + cM.DailyPrice);
+                    Console.WriteLine(cM.CarId + " " + cM.BrandName + " " + cM.ColorName + " " + cM.DailyPrice);
                 }
 
             }
@@ -56,7 +56,7 @@ namespace ConsoleUI
 
             foreach (var cM in result.Data)
             {
-                Console.WriteLine(cM.CarId + " " + cM.CarName + " " + cM.ColorName + " " + cM.DailyPrice);
+                Console.WriteLine(cM.CarId + " " + cM.BrandName + " " + cM.ColorName + " " + cM.DailyPrice);
             }
 
         }

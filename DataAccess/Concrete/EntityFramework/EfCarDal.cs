@@ -22,10 +22,13 @@ namespace DataAccess.Concrete.EntityFramework
                              ca.BrandId equals br.BrandId
                              join co in context.Colors on
                              ca.ColorId equals co.ColorId
+                             join mo in context.Models on
+                             br.BrandId equals mo.BrandId
                              select new CarDetailDto { 
                                  CarId = ca.Id,
                                  BrandId=ca.BrandId, 
-                                 CarName = br.BrandName,
+                                 BrandName = br.BrandName,
+                                 ModelName=mo.ModelName,
                                  ColorId=ca.ColorId,
                                  ColorName = co.ColorName,
                                  ModelYear=ca.ModelYear,
@@ -48,11 +51,14 @@ namespace DataAccess.Concrete.EntityFramework
                              ca.BrandId equals br.BrandId
                              join co in context.Colors on
                              ca.ColorId equals co.ColorId
+                             join mo in context.Models on
+                             br.BrandId equals mo.BrandId
                              where ca.BrandId == brandId
                              select new CarDetailDto {
                                  CarId = ca.Id,
                                  BrandId = ca.BrandId,
-                                 CarName = br.BrandName,
+                                 BrandName = br.BrandName,
+                                 ModelName=mo.ModelName,
                                  ColorId = ca.ColorId,
                                  ColorName = co.ColorName,
                                  ModelYear=ca.ModelYear,
@@ -76,10 +82,13 @@ namespace DataAccess.Concrete.EntityFramework
                              ca.BrandId equals br.BrandId
                              join co in context.Colors on
                              ca.ColorId equals co.ColorId
+                             join mo in context.Models on
+                            br.BrandId equals mo.BrandId
                              where ca.Id==carId
                              select new CarDetailDto {
                                  CarId = ca.Id,
-                                 CarName = br.BrandName,
+                                 BrandName = br.BrandName,
+                                 ModelName = mo.ModelName,
                                  ColorName = co.ColorName,
                                  ModelYear = ca.ModelYear, 
                                  DailyPrice = ca.DailyPrice, 
@@ -103,11 +112,14 @@ namespace DataAccess.Concrete.EntityFramework
                              ca.BrandId equals br.BrandId
                              join co in context.Colors on
                              ca.ColorId equals co.ColorId
+                             join mo in context.Models on
+                             br.BrandId equals mo.BrandId
                              where ca.ColorId==colorId
                              select new CarDetailDto {
                                  CarId = ca.Id,
                                  BrandId = ca.BrandId,
-                                 CarName = br.BrandName,
+                                 BrandName = br.BrandName,
+                                 ModelName = mo.ModelName,
                                  ColorId = ca.ColorId,
                                  ColorName = co.ColorName,
                                  ModelYear=ca.ModelYear,
