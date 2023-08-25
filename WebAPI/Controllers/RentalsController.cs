@@ -92,9 +92,11 @@ namespace WebAPI.Controllers
             return BadRequest(result);
 
         }
+        
         [HttpPost("rulesforadding")]
         public IActionResult RulesForAdding(Rental rental)
         {
+            Thread.Sleep(5000);
             var result = _rentalService.RulesForAdding(rental);
             if (result.Success)
             {

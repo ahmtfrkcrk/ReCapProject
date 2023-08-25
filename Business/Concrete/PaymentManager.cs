@@ -39,6 +39,23 @@ namespace Business.Concrete
             return new SuccessDataResult<Payment>(_paymentDal.Get(p => p.Id == Id));
         }
 
+        public IResult Pay(Payment payment)
+        {
+            var result = _paymentDal.Get(p =>
+           p.FullName == payment.FullName
+           && p.CardNumber == payment.CardNumber
+           && p.Month == payment.Month
+           && p.Year == payment.Year
+           && p.CVV == payment.CVV
+           );
+
+            if (result != null)
+            {
+                return new SuccessResult(Messages.PayIsSuccessfull);
+            }
+            return new ErrorResult(Messages.CardInformationIsIncorrect);
+        }
+
         public IResult Update(Payment payment)
         {
             _paymentDal.Update(payment);

@@ -9,6 +9,7 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Business.Concrete
 {
@@ -57,6 +58,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetail(), Messages.Listed);
         }
 
+        
         public IResult RulesForAdding(Rental rental)
         {
             var result = _rentalDal.Get(r =>

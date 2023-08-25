@@ -27,5 +27,7 @@ namespace Business.Constants
         public static string AccessTokenCreated="Token oluşturuldu";
 
         public static string Error = "Hata";
+        public static string PayIsSuccessfull = "Ödeme başarılı";
+        public static string CardInformationIsIncorrect = "Kart doğrulaması hatalı";
     }
 }
