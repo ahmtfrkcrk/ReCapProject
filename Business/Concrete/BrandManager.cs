@@ -7,6 +7,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -22,7 +23,11 @@ namespace Business.Concrete
         [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
-           
+            if (CheckIfBrandNameExists(brand.BrandName))
+            {
+                return new ErrorResult(Messages.DuplicateName); // Hata durumunda döndürülen mesaj.
+            }
+
             _brandDal.Add(brand);
             return new SuccessResult(Messages.Added);
         }
@@ -47,6 +52,10 @@ namespace Business.Concrete
         {
            _brandDal.Update(brand);
             return new SuccessResult(Messages.Updated);
+        }
+        public bool CheckIfBrandNameExists(string brandName)
+        {
+            return _brandDal.GetAll(b => b.BrandName == brandName).Any();
         }
     }
 }

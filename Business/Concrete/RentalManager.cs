@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -61,18 +62,17 @@ namespace Business.Concrete
         
         public IResult RulesForAdding(Rental rental)
         {
-            var result = _rentalDal.Get(r =>
-           r.CarId == rental.CarId
-           && (r.RentDate == rental.RentDate
-           || (r.RentDate < rental.RentDate
-           && (r.ReturnDate == null
-           || ((DateTime)r.ReturnDate).Date > rental.RentDate))));
-
+            var result = BusinessRules.Run(
+               CheckIfThisCarIsAlreadyRentedInSelectedDateRange(rental),
+               CheckIfReturnDateIsBeforeRentDate(rental.ReturnDate,Convert.ToDateTime( rental.RentDate))
+               );
             if (result != null)
             {
-                return new ErrorResult(Messages.Error);
+                return result;
             }
-            return new SuccessResult();
+
+
+            return new SuccessResult(Messages.PayIsSuccessfull);
         }
 
         public IResult Update(Rental rental)
@@ -109,10 +109,16 @@ namespace Business.Concrete
             }
             return new SuccessResult();
 
-
-
-
         }
 
+        private IResult CheckIfReturnDateIsBeforeRentDate(DateTime? returnDate, DateTime rentDate)
+        {
+            if (returnDate != null)
+                if (returnDate < rentDate)
+                {
+                    return new ErrorResult(Messages.ThisCarIsAlreadyRentedInSelectedDateRange);
+                }
+            return new SuccessResult();
+        }
     }
 }

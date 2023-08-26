@@ -18,16 +18,18 @@ namespace Business.Constants
         public static string Updated = "Güncellendi";
         public static string VehicleNotFound = "Kiralanacak araç bulunamadı";
         public static string AutomaticIncrementField = "Otomatik artan alan değer girilemez";
-        public static string AuthorizationDenied= "Yetki reddedildi";
+        public static string AuthorizationDenied = "Yetki reddedildi";
         public static string UserRegistered = "Başarıyla kullanıcı oluşturuldu";
-        public static string UserNotFound ="Kullanıcı bulunamadı";
-        public static string PasswordError="Geçersiz parola";
-        public static string UserAlreadyExists="Bu kullanıcı mevcut";
-        public static string SuccessfulLogin="Giriş başarılı";
-        public static string AccessTokenCreated="Token oluşturuldu";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Geçersiz parola";
+        public static string UserAlreadyExists = "Bu kullanıcı mevcut";
+        public static string SuccessfulLogin = "Giriş başarılı";
+        public static string AccessTokenCreated = "Token oluşturuldu";
 
         public static string Error = "Hata";
         public static string PayIsSuccessfull = "Ödeme başarılı";
         public static string CardInformationIsIncorrect = "Kart doğrulaması hatalı";
+        public static string DuplicateName = "Bu kayıt mevcut";
+        public static string ThisCarIsAlreadyRentedInSelectedDateRange = "Bu araba seçili tarih aralığında zaten kiralandı";
     }
 }

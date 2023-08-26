@@ -76,6 +76,9 @@ namespace WebAPI
                 app.UseStaticFiles();
             }
 
+            //Kendi  exception middleware mizi ekledim.
+            app.ConfigureCustomExceptionMiddleware();
+
             app.UseCors(builder => builder.WithOrigins("http://localhost:4200", "https://localhost:44326/").AllowAnyHeader());
 
             app.UseHttpsRedirection();
