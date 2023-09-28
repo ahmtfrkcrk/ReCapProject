@@ -23,41 +23,41 @@ namespace ConsoleUI
             Console.ReadLine();
         }
 
-        private static void CarDetailTest()
-        {
-            CarManager carManager = new CarManager(new EfCarDal());
+        //private static void CarDetailTest()
+        //{
+        //    CarManager carManager = new CarManager(new EfCarDal());
 
-            var result = carManager.GetCarDetail();
+        //    var result = carManager.GetCarDetail();
 
-            if (result.Success)
-            {
-                foreach (var cM in result.Data)
-                {
-                    Console.WriteLine(cM.CarId + " " + cM.BrandName + " " + cM.ColorName + " " + cM.DailyPrice);
-                }
+        //    if (result.Success)
+        //    {
+        //        foreach (var cM in result.Data)
+        //        {
+        //            Console.WriteLine(cM.CarId + " " + cM.BrandName + " " + cM.ColorName + " " + cM.DailyPrice);
+        //        }
 
-            }
-            else
-            {
-                Console.WriteLine(result.Message);
-            }
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine(result.Message);
+        //    }
 
 
-        }
+        //}
 
         private static void CarBrandManagerSelect()
         {
-            CarManager carManager = new CarManager(new EfCarDal());
-            carManager.Add(new Car { ColorId = 2, DailyPrice = 875, ModelYear = 2012, Description = "Aylık kiralamada %10 daha uygun", BrandId = 4 });
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            brandManager.Add(new Brand { BrandName = "Ford" });//Brand Id otomatik artan alan
+        //    CarManager carManager = new CarManager(new EfCarDal());
+        //    carManager.Add(new Car { ColorId = 2, DailyPrice = 875, ModelYear = 2012, Description = "Aylık kiralamada %10 daha uygun", BrandId = 4 });
+        //    BrandManager brandManager = new BrandManager(new EfBrandDal());
+        //    brandManager.Add(new Brand { BrandName = "Ford" });//Brand Id otomatik artan alan
 
-            var result = carManager.GetCarDetail();
+        //    var result = carManager.GetCarDetail();
 
-            foreach (var cM in result.Data)
-            {
-                Console.WriteLine(cM.CarId + " " + cM.BrandName + " " + cM.ColorName + " " + cM.DailyPrice);
-            }
+        //    foreach (var cM in result.Data)
+        //    {
+        //        Console.WriteLine(cM.CarId + " " + cM.BrandName + " " + cM.ColorName + " " + cM.DailyPrice);
+        //    }
 
         }
     }

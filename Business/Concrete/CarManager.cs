@@ -14,22 +14,29 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Core.Utilities.Business;
 
 namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
         ICarDal _carDal;
-        public CarManager(ICarDal carDal)
+        public CarManager(ICarDal carDal )
         {
             _carDal = carDal;
             
         }
+
+        //  [SecuredOperation("Car.Add")] 
         [ValidationAspect(typeof(CarValidator))]
-        [SecuredOperation("Car.Add")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
+            var result = BusinessRules.Run(CheckIfCarExists(car.BrandId,car.ModelId,car.ModelYear,car.ColorId));
+            if (result != null)
+            {
+                return new ErrorResult(Messages.ThisCarAlreadyExists);
+            }
                 _carDal.Add(car);
             return new SuccessResult(Messages.Added);
            
@@ -96,6 +103,17 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(
                _carDal.GetCarDetails()
                .Where(c => c.BrandId == brandId && c.ColorId == colorId).ToList());
+        }
+        public IResult CheckIfCarExists(int brandId,int modelId,int modelYear,int colorId)
+        {
+            //mukerrer kontrol yapıyorum.
+            var result = _carDal.GetAll(c => c.BrandId==brandId && c.ModelId==modelId && c.ModelYear==modelYear && c.ColorId==colorId).Any();
+
+            if (result)
+            {
+                return new ErrorResult();
+            }
+            return new SuccessResult();
         }
     }
 }

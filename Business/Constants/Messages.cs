@@ -31,5 +31,8 @@ namespace Business.Constants
         public static string CardInformationIsIncorrect = "Kart doğrulaması hatalı";
         public static string DuplicateName = "Bu kayıt mevcut";
         public static string ThisCarIsAlreadyRentedInSelectedDateRange = "Bu araba seçili tarih aralığında zaten kiralandı";
+        public static string UserAvailable = "Bu müşteri mevcut";
+        public static string ThisCarAlreadyExists = "Bu özelliklerde araç mevcut";
+        public static string BrandOrModelNotFound = "Marka veya model bulunamadı";
     }
 }

@@ -1,10 +1,12 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -20,6 +22,12 @@ namespace Business.Concrete
 
         public IResult Add(Model model)
         {
+            var result = BusinessRules.Run(CheckIfModelNameExists(model.ModelName));
+            if (result != null)
+            {
+                return result;
+            }
+
             _modelDal.Add(model);
             return new SuccessResult(Messages.Added);
         }
@@ -44,6 +52,15 @@ namespace Business.Concrete
         {
             _modelDal.Update(model);
             return new SuccessResult(Messages.Updated);
+        }
+        public IResult CheckIfModelNameExists(string modelName)
+        {
+            var result = _modelDal.GetAll(m => m.ModelName == modelName).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.DuplicateName);
+            }
+            return new SuccessResult();
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using FluentValidation;
+﻿using Core.Utilities.Results;
+using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -29,23 +31,23 @@ namespace Core.Extensions
                 await HandleExceptionAsync(httpContext, e);
             }
         }
-
         private Task HandleExceptionAsync(HttpContext httpContext, Exception e)
         {
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            IEnumerable<ValidationFailure> errors;
+            
             string message = "Internal Server Error";
+            IEnumerable<ValidationFailure> errors;
+
             if (e.GetType() == typeof(ValidationException))
             {
                 message = e.Message;
                 errors = ((ValidationException)e).Errors;
-                // httpContext.Response.StatusCode = 400;
 
                 return httpContext.Response.WriteAsync(new ValidationErrorDetails
                 {
                     StatusCode = 400,
-                    Message=message,
+                    Message = message,
                     ValidationErrors = errors
 
                 }.ToString());
@@ -57,5 +59,6 @@ namespace Core.Extensions
                 Message = message
             }.ToString());
         }
+
     }
 }
